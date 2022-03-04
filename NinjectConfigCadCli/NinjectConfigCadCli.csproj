@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DaraAccessCadCli\DaraAccessCadCli.csproj" />
+    <ProjectReference Include="..\DomainCadCli\DomainCadCli.csproj" />
+    <ProjectReference Include="..\ServiceCadCli\ServiceCadCli.csproj" />
+  </ItemGroup>
+
+</Project>
