@@ -70,8 +70,8 @@ namespace WbapiCadCli.Controllers
         {
             try
             {
-                await _clienteService.Modify(clienteDTO);
-                return Ok();
+                var result = await _clienteService.Modify(clienteDTO);
+                return Ok(result);
 
             }
             catch (Exception ex)
@@ -88,9 +88,9 @@ namespace WbapiCadCli.Controllers
         {
             try
             {
-                await _clienteService.Insert(clienteDTO);
+                var result = await _clienteService.Insert(clienteDTO);
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {

@@ -13,6 +13,9 @@ namespace ServiceCadCli.DTO
         [Required]
         public string SobreNome { get; set; }
         [Required]
+        public string Cpf { get; set; }
+
+        [Required]
         public string Nacionalidade { get; set; }
         [Required]
         public string Cep { get; set; }

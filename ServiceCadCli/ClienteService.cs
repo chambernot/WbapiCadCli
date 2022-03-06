@@ -33,16 +33,16 @@ namespace ServiceCadCli
            return clientemapper;
         }
 
-        public async Task Insert(ClienteDTO cliente)
+        public async Task<Cliente> Insert(ClienteDTO cliente)
         {
             var clientemapper = AutoMapper.Mapper.Map<ClienteDTO, Cliente>(cliente);
-            await _clienteRepository.InsertCliente(clientemapper);
+            return await _clienteRepository.InsertCliente(clientemapper);
         }
 
-        public async Task Modify(ClienteDTO cliente)
+        public async Task<Cliente> Modify(ClienteDTO cliente)
         {
             var clientemapper = AutoMapper.Mapper.Map<ClienteDTO, Cliente>(cliente);
-            await _clienteRepository.ModifyCliente(clientemapper);
+            return await _clienteRepository.ModifyCliente(clientemapper);
         }
 
         public async Task<List<ClienteDTO>> Get()

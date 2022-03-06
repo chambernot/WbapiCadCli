@@ -11,9 +11,9 @@ namespace DomainCadCli.Interfaces.Repositories
         Task<List<Cliente>> GetClienteName(string nome);
         Task<List<Cliente>> GetCliente();
 
-        Task InsertCliente(Cliente cliente );
+        Task<Cliente> InsertCliente(Cliente cliente );
 
-        Task ModifyCliente(Cliente cliente);
+        Task<Cliente> ModifyCliente(Cliente cliente);
 
         Task DeleteCliente(Cliente cliente);
 

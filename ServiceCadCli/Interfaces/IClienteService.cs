@@ -9,9 +9,9 @@ namespace ServiceCadCli.Interfaces
 {
     public interface IClienteService
     {
-        Task Insert(ClienteDTO cliente);
+        Task<Cliente> Insert(ClienteDTO cliente);
 
-        Task Modify(ClienteDTO cliente);
+        Task<Cliente> Modify(ClienteDTO cliente);
 
         Task Delete(string id);
 

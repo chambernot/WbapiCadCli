@@ -32,6 +32,7 @@ namespace DaraAccessCadCli.Collections
                 .Projection
                 .Include(p => p.Id)
                 .Include(p => p.DataCriacaoColecao)
+                .Include(p => p.Cpf)
                 .Include(p => p.Cep)
                 .Include(p => p.Cidade)
                 .Include(p => p.Email)
@@ -52,6 +53,7 @@ namespace DaraAccessCadCli.Collections
                 .Include(p => p.Id)
                 .Include(p => p.DataCriacaoColecao)
                 .Include(p => p.Cep)
+                .Include(p => p.Cpf)
                 .Include(p => p.Cidade)
                 .Include(p => p.Email)
                 .Include(p => p.Estado)
@@ -70,14 +72,61 @@ namespace DaraAccessCadCli.Collections
             
         }
 
-        public async Task InsertCliente(Cliente cliente)
+        public async Task<Cliente> InsertCliente(Cliente cliente)
         {
-            await _collection.InsertOneAsync(cliente);
+            var fields = Builders<Cliente>
+                .Projection
+                .Include(p => p.Id)
+                .Include(p => p.DataCriacaoColecao)
+                .Include(p => p.Cep)
+                .Include(p => p.Cpf)
+                .Include(p => p.Cidade)
+                .Include(p => p.Email)
+                .Include(p => p.Estado)
+                .Include(p => p.Estado)
+                .Include(p => p.Logradouro)
+                .Include(p => p.Nacionalidade)
+                .Include(p => p.Nome)
+                .Include(p => p.SobreNome)
+                .Include(p => p.Telefone);
+
+            Expression<Func<Cliente, bool>> filter = prop =>
+               prop.Cpf.ToUpper().Contains(cliente.Cpf);
+           var existecliente = await _collection.Find(filter).Project<Cliente>(fields).FirstOrDefaultAsync();
+            if (existecliente != null)
+            {
+                return new Cliente();
+            }
+            else
+            {
+               await _collection.InsertOneAsync(cliente);
+               return await _collection.Find(filter).Project<Cliente>(fields).FirstOrDefaultAsync();
+            }
+            
         }
 
-        public async Task ModifyCliente(Cliente cliente)
+        public async Task<Cliente> ModifyCliente(Cliente cliente)
         {
+            var fields = Builders<Cliente>
+                .Projection
+                .Include(p => p.Id)
+                .Include(p => p.DataCriacaoColecao)
+                .Include(p => p.Cep)
+                .Include(p => p.Cpf)
+                .Include(p => p.Cidade)
+                .Include(p => p.Email)
+                .Include(p => p.Estado)
+                .Include(p => p.Estado)
+                .Include(p => p.Logradouro)
+                .Include(p => p.Nacionalidade)
+                .Include(p => p.Nome)
+                .Include(p => p.SobreNome)
+                .Include(p => p.Telefone);
+
+            Expression<Func<Cliente, bool>> filter = prop =>
+               prop.Cpf.ToUpper().Contains(cliente.Cpf);
             await _collection.ReplaceOneAsync(x => x.Id.Equals(ObjectId.Parse(cliente.Id)), cliente);
+           return await _collection.Find(filter).Project<Cliente>(fields).FirstOrDefaultAsync();
         }
     }
 }
